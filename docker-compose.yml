@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  nexusflag-api:
+    build: .
+    container_name: nexusflag_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ./static/challenges:/app/static/challenges
+    environment:
+      - DATABASE_URL=sqlite:////app/nexus_flag.db
+      - SECRET_KEY=change_this_to_a_random_string_in_production
+    restart: always

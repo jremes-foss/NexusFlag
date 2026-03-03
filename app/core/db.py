@@ -1,8 +1,12 @@
+import os
 from sqlalchemy import create_engine  # Fixed this line
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./nexus_flag.db"
+SQLALCHEMY_DATABASE_URL = os.getenv(
+    "DATABASE_URL", 
+    "sqlite:///./nexus_flag.db"
+)
 
 # Create the engine
 engine = create_engine(

@@ -1,0 +1,7 @@
+venv/
+__pycache__/
+*.pyc
+nexus_flag.db
+static/challenges/*
+.git/
+.env

@@ -14,6 +14,14 @@ Built as a spiritual successor to BeeCTF, NexusFlag updates the vision of commun
 
 # Installation
 
+Currently, NexusFlag supports two basic installation methods, either Docker installation or native installation. The following subsections will walk you through both.
+
+**NOTE:** For Docker installation, you need to install [Docker Compose](https://docs.docker.com/compose/).
+
+## Quick Start with Docker
+
+The fastest way to get NexusFlag up and running is using Docker. This will automatically pull the environment, install dependencies, and seed your initial database.
+
 Clone the repository:
 
 ```bash
@@ -21,20 +29,55 @@ git clone https://github.com/yourusername/NexusFlag.git
 cd NexusFlag
 ```
 
-Set up the virtual environment:
+Then, launch the application with docker-compose:
+
+```bash
+docker-compose up --build
+```
+
+Now, API can be accessed with following specifications:
+
+* API base: `http://localhost:8000`
+* Interactive documentation: `http://localhost:8000/docs`
+* Default admin credentials: `admin / admin123`.
+
+To stop the services, please run the following:
+
+```bash
+docker-compose down
+```
+
+If you want to see the logs for debugging purposes, you can tail the logs with Docker:
+
+```bash
+docker-compose logs -f
+```
+
+## Manual Installation
+
+If you prefer to run NexusFlag in native environment, NexusFlag can be installed manually.
+
+To start, clone the repository:
+
+```bash
+git clone https://github.com/yourusername/NexusFlag.git
+cd NexusFlag
+```
+
+Next, set up the virtual environment:
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
-Install dependencies:
+After the virtual environment has been set up, install the necessary dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Initialise and seed the database:
+Finally, initialise and seed the database:
 
 ```bash
 export PYTHONPATH=$PYTHONPATH:.
