@@ -1,3 +1,5 @@
+[![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://stand-with-ukraine.pp.ua)
+
 # NexusFlag CTF API
 
 # Introduction
@@ -60,7 +62,7 @@ If you prefer to run NexusFlag in native environment, NexusFlag can be installed
 To start, clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/NexusFlag.git
+git clone https://github.com/jremes-foss/NexusFlag.git
 cd NexusFlag
 ```
 
