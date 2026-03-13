@@ -27,7 +27,7 @@ The fastest way to get NexusFlag up and running is using Docker. This will autom
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/NexusFlag.git
+git clone https://github.com/jremes-foss/NexusFlag.git
 cd NexusFlag
 ```
 
