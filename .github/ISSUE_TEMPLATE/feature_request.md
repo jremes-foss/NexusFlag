@@ -1,10 +1,4 @@
 ---
-
-### 2. Feature Request Template
-Create a file at `.github/ISSUE_TEMPLATE/feature_request.md`.
-
-```markdown
----
 name: ✨ Feature Request
 about: Suggest an idea or enhancement for NexusFlag
 title: '[FEATURE]: '
