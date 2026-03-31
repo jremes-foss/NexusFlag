@@ -1,0 +1,25 @@
+---
+
+### 2. Feature Request Template
+Create a file at `.github/ISSUE_TEMPLATE/feature_request.md`.
+
+```markdown
+---
+name: ✨ Feature Request
+about: Suggest an idea or enhancement for NexusFlag
+title: '[FEATURE]: '
+labels: enhancement
+assignees: ''
+---
+
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen. Consider the API impact (new endpoints, schema changes).
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional Context**
+Add any other context or screenshots/mockups about the feature request here.
