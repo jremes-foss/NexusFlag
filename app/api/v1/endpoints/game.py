@@ -34,6 +34,7 @@ def submit_flag(
     if not challenge:
         raise HTTPException(status_code=404, detail="Challenge not found")
 
+    # 1. Prevent double-scoring
     already_solved = db.query(Submission).filter(
         Submission.user_id == current_user.id,
         Submission.challenge_id == challenge.id,
@@ -50,21 +51,33 @@ def submit_flag(
 
     is_correct = submission_in.flag_input.strip() == challenge.flag.strip()
 
+    bonus_points = 0
+    if is_correct:
+        first_blood_exists = db.query(Submission).filter(
+            Submission.challenge_id == challenge.id,
+            Submission.is_correct == True
+        ).first()
+
+        if not first_blood_exists:
+            bonus_points = int(challenge.points * 0.1)
+            message = f"FIRST BLOOD! Correct! +{challenge.points + bonus_points} points (inc. bonus)."
+        else:
+            message = f"Correct! +{challenge.points} points."
+
+        current_user.score += (challenge.points + bonus_points)
+        current_user.last_solve_at = datetime.utcnow()
+        db.add(current_user)
+    else:
+        message = "Incorrect flag. Keep trying!"
+
     new_submission = Submission(
         user_id=current_user.id,
         challenge_id=challenge.id,
         content=submission_in.flag_input,
-        is_correct=is_correct
+        is_correct=is_correct,
+        is_first_blood=(is_correct and not first_blood_exists)
     )
     db.add(new_submission)
-
-    if is_correct:
-        current_user.score += challenge.points
-        current_user.last_solve_at = datetime.utcnow()
-        db.add(current_user)
-        message = f"Correct! +{challenge.points} points."
-    else:
-        message = "Incorrect flag. Keep trying!"
 
     db.commit()
     db.refresh(current_user)
