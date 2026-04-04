@@ -41,5 +41,6 @@ class Submission(Base):
     content = Column(String, nullable=False)
     is_correct = Column(Boolean, default=False)
     timestamp = Column(DateTime, default=datetime.utcnow)
+    is_first_blood = Column(Boolean, default=False)
 
     challenge = relationship("Challenge", back_populates="submissions")
