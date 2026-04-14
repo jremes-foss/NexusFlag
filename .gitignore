@@ -220,3 +220,6 @@ static
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Env
+.env
