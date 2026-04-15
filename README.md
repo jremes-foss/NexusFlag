@@ -2,6 +2,8 @@
 
 # NexusFlag CTF API
 
+![NexusFlag CI](https://github.com/jremes-foss/NexusFlag/actions/workflows/tests.yml/badge.svg)
+
 # Introduction
 
 NexusFlag is a Python-based, easily-deployable, no-fuss, Open Source API for small community CTF (Capture the Flag) cybersecurity events. The project emphasizes accessibility, allowing communities to run their own events without heavy dependence on commercial platforms.
