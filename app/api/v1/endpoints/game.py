@@ -117,3 +117,49 @@ def download_challenge_file(
         filename=os.path.basename(challenge.file_path),
         media_type='application/octet-stream'
     )
+
+@router.post("/challenges", response_model=ChallengeResponse)
+def create_new_challenge(
+    challenge_in: ChallengeCreate,
+    db: Session = Depends(get_db),
+    admin_user: User = Depends(get_current_admin_user) 
+):
+    new_challenge = Challenge(
+        title=challenge_in.title,
+        description=challenge_in.description,
+        flag=challenge_in.flag,
+        points=challenge_in.points,
+        category_id=challenge_in.category_id,
+        difficulty=challenge_in.difficulty
+    )
+    db.add(new_challenge)
+    db.commit()
+    db.refresh(new_challenge)
+    return new_challenge
+
+@router.get("/challenges", response_model=List[CategoryResponse])
+def list_challenges(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    categories = db.query(Category).all()
+    for cat in categories:
+        for chal in cat.challenges:
+            chal.download_url = get_file_url(chal)
+
+    return categories
+
+@router.get("/scoreboard", response_model=List[ScoreboardEntry])
+def get_scoreboard(
+    db: Session = Depends(get_db),
+    limit: int = 50
+):
+    users = db.query(User) \
+             .order_by(
+                 User.score.desc(),
+                 User.last_solve_at.asc()
+            ) \
+             .limit(limit) \
+             .all()
+
+    return users
