@@ -1,5 +1,5 @@
 # Web Framework
-fastapi>=0.100.0
+fastapi>=0.136.1
 uvicorn[standard]>=0.22.0
 
 # Database
