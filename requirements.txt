@@ -3,7 +3,7 @@ fastapi>=0.100.0
 uvicorn[standard]>=0.22.0
 
 # Database
-sqlalchemy>=2.0.0
+sqlalchemy>=2.0.49
 
 # Security & Authentication
 # Using bcrypt 4.0.1 specifically to maintain passlib compatibility
