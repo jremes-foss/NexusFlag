@@ -6,6 +6,8 @@ from app.core.db import get_db
 from app.models.challenge import Challenge
 from app.models.user import User
 from app.api.deps import get_current_admin_user
+from app.models.notification import Notification
+from app.schemas.notification import NotificationCreate, NotificationResponse
 
 router = APIRouter()
 
@@ -43,3 +45,19 @@ async def upload_challenge_file(
         "challenge_id": challenge_id,
         "status": "successfully uploaded"
     }
+
+@router.post("/notifications", response_model=NotificationResponse)
+def create_global_notification(
+    notification_in: NotificationCreate,
+    db: Session = Depends(get_db),
+    _admin_user: User = Depends(get_current_admin_user)
+):
+    """
+    Allows admins to broadcast a short notification to all players.
+    """
+    new_notification = Notification(content=notification_in.content.strip())
+    db.add(new_notification)
+    db.commit()
+    db.refresh(new_notification)
+    
+    return new_notification
