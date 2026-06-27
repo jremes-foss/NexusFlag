@@ -10,6 +10,8 @@ from typing import List
 from app.core.config import get_file_url
 from app.core.db import get_db
 from app.api.deps import get_current_admin_user, get_current_user
+from app.models.notification import Notification
+from app.schemas.notification import NotificationResponse
 
 from app.models.user import User
 from app.schemas.user import ScoreboardEntry
@@ -163,3 +165,18 @@ def get_scoreboard(
              .all()
 
     return users
+
+@router.get("/notifications", response_model=List[NotificationResponse])
+def get_timeline_notifications(
+    db: Session = Depends(get_db),
+    _current_user: User = Depends(get_current_user),
+    limit: int = 20
+):
+    """
+    Fetches the latest global notifications for the player's timeline.
+    """
+    notifications = db.query(Notification) \
+                      .order_by(Notification.created_at.desc()) \
+                      .limit(limit) \
+                      .all()
+    return notifications
