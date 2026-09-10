@@ -110,9 +110,9 @@ uvicorn app.main:app --reload
 
 **NOTE**: Note: If you modify the database models, delete the `nexus_flag.db` file and re-run `seed.py` to apply the changes.
 
-# Important
+# Note on Front-End Component
 
-NexusFlag is still under active development, so it is likely not ready for production use. This repository is used to host the code. Once MVP is ready for production use, I will remove this disclaimer from README. Thank you.
+Please note, NexusFlag CTF API does not come with a front-end component. You will have to use your own. This is to keep the maintenance workflow of API simple and easier to maintain. For the endpoints, please refer to the documentation.
 
 # License
 NexusFlag is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. 
