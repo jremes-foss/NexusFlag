@@ -13,7 +13,7 @@ python-jose[cryptography]>=3.5.0
 python-multipart>=0.0.32
 
 # Utilities
-pydantic[email]>=2.13.4
+pydantic[email]>=2.13.5
 
 # Factories and PyTest + Utilities
 factory-boy==3.3.3
