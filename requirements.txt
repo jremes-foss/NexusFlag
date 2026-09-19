@@ -1,6 +1,6 @@
 # Web Framework
 fastapi>=0.141.1
-uvicorn[standard]>=0.22.0
+uvicorn[standard]>=0.53.0
 
 # Database
 sqlalchemy>=2.0.0
