@@ -3,6 +3,7 @@
 # NexusFlag CTF API
 
 ![NexusFlag CI](https://github.com/jremes-foss/NexusFlag/actions/workflows/tests.yml/badge.svg)
+[![NexusFlag Docs](https://img.shields.io/badge/documentation-NexusFlag-color)](https://jremes-foss.github.io/nexusflag-docs/)
 
 # Introduction
 
