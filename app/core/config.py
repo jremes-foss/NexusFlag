@@ -5,6 +5,11 @@ STORAGE_MODE = "local"  # or "s3"
 BASE_URL = "http://localhost:8000"
 S3_BUCKET_URL = "https://nexusflag-assets.s3.amazonaws.com"
 
+# Rate Limiting Defaults
+RATE_LIMIT_ENABLED = True
+DEFAULT_LOGIN_LIMIT = "5/minute"
+DEFAULT_SUBMIT_LIMIT = "10/minute"
+
 def get_file_url(challenge: Challenge) -> Optional[str]:
     if not challenge.file_path:
         return None
