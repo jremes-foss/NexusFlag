@@ -1,13 +1,15 @@
 import os
 from datetime import datetime, timezone # Updated for modern UTC
 from pathlib import Path # New import for secure path handling
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from fastapi.responses import FileResponse # New import for downloads
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from typing import List
 
 from app.core.config import get_file_url
+from app.core.limiter import limiter, dynamic_submit_limit, is_rate_limit_disabled
+
 from app.core.db import get_db
 from app.api.deps import get_current_admin_user, get_current_user
 from app.models.notification import Notification
@@ -29,7 +31,9 @@ router = APIRouter()
 UPLOAD_DIR = "static/challenges"
 
 @router.post("/submit", response_model=SubmissionResponse)
+@limiter.limit(dynamic_submit_limit, exempt_when=is_rate_limit_disabled)
 def submit_flag(
+    request: Request, # Required by SlowAPI, do not remove!
     submission_in: SubmissionCreate, 
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)

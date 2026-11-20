@@ -8,6 +8,8 @@ from app.models.user import User
 from app.api.deps import get_current_admin_user
 from app.models.notification import Notification
 from app.schemas.notification import NotificationCreate, NotificationResponse
+from app.core.limiter import get_system_config
+from app.schemas.settings import RateLimitUpdate
 
 router = APIRouter()
 
@@ -61,3 +63,19 @@ def create_global_notification(
     db.refresh(new_notification)
     
     return new_notification
+
+@router.put("/settings/rate_limit", response_model=RateLimitUpdate)
+def update_rate_limit_settings(
+    settings_in: RateLimitUpdate,
+    db: Session = Depends(get_db),
+    _admin_user: User = Depends(get_current_admin_user)
+):
+    config = get_system_config()
+    config.rate_limit_enabled = settings_in.rate_limit_enabled
+    config.login_rate_limit = settings_in.login_rate_limit
+    config.submit_rate_limit = settings_in.submit_rate_limit
+    
+    db.add(config)
+    db.commit()
+    db.refresh(config)
+    return config
