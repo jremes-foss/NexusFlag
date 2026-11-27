@@ -8,7 +8,7 @@ sqlalchemy>=2.0.0
 # Security & Authentication
 # Using bcrypt 4.0.1 specifically to maintain passlib compatibility
 bcrypt==5.0.0
-passlib[bcrypt]>=1.7.4
+passlib[bcrypt]>=1.9.5
 python-jose[cryptography]>=3.5.0
 python-multipart>=0.0.32
 slowapi==0.1.10
